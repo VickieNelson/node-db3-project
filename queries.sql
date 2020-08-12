@@ -11,21 +11,20 @@ From Product AS P
 
 SELECT Id, CompanyName
 FROM [Order]
-AS 0
-LEFT JOIN Shipper as S
-ON O.ShipVia = S.Id
+AS O
+    LEFT JOIN Shipper as S
+    ON O.ShipVia = S.Id
 WHERE "OrderDate" < "2012-08-09"
 
 -- Display the name and quantity of the products ordered in order with Id 10251. Sort by ProductName. Shows 3 records.
 
 
-SELECT ProductName, Quantity
-FROM [OrderDetail]
-AS 0
-JOIN Product AS P
-ON O.ProductID = P.Id;
-WHERE O.OrderId = 10251
-ORDER BYT P.ProductName
+select product.ProductName, orderDetail.id, orderdetail.quantity
+from product
+    join OrderDetail
+    on product.id = orderDetail.productId
+where OrderDetail.orderId = 10251
+order by product.ProductName
 
 -- Display the OrderID, Customer's Company Name and the employee's LastName for every order. All columns should be labeled clearly. Displays 16,789 records.
 SELECT O.Id AS OrderId, CompanyName AS Customer, LastName AS EmployeeLastName

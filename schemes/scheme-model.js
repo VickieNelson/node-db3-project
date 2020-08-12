@@ -8,17 +8,17 @@ module.exports = {
   update,
   remove,
 };
-// this function works
+// Working
 function find() {
   return db("schemes");
 }
 
-// this function works
+// Working
 function findById(id) {
   return db("schemes").where({ id }).first();
 }
 
-// this function works
+// Working
 function findSteps(scheme_id) {
   return db()
     .select("*", "scheme_name")
@@ -28,7 +28,7 @@ function findSteps(scheme_id) {
     .orderBy("st.step_number");
 }
 
-// this end function works
+// Working
 
 function add(scheme) {
   return db("schemes")
@@ -38,12 +38,12 @@ function add(scheme) {
     });
 }
 
-// this function works
+// Working
 function update(changes, id) {
   return db("schemes").where({ id }).update(changes);
 }
 
-// this function works
+// Working
 function remove(id) {
   return db("schemes").where({ id }).del();
 }
