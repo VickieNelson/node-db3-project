@@ -8,17 +8,17 @@ module.exports = {
   update,
   remove,
 };
-// Working
+// Working - return all schemes
 function find() {
   return db("schemes");
 }
 
-// Working
+// Working - return specific scheme by id
 function findById(id) {
   return db("schemes").where({ id }).first();
 }
 
-// Working
+// Working - return all steps by scheme id
 function findSteps(scheme_id) {
   return db()
     .select("*", "scheme_name")
@@ -28,7 +28,7 @@ function findSteps(scheme_id) {
     .orderBy("st.step_number");
 }
 
-// Working
+// Working - add new step to scheme and return
 
 function add(scheme) {
   return db("schemes")
@@ -38,12 +38,17 @@ function add(scheme) {
     });
 }
 
-// Working
-function update(changes, id) {
-  return db("schemes").where({ id }).update(changes);
+// Working - update scheme and return
+function update(id, changes) {
+  return db("schemes")
+    .where({ id })
+    .update(changes)
+    .then(() => {
+      return findById(id);
+    });
 }
 
-// Working
+// Working - remove a scheme a id
 function remove(id) {
   return db("schemes").where({ id }).del();
 }
